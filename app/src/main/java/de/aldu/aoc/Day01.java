@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Day01 {
     public static void solve() {
-        var linesOpt = Util.readFileAsLines("/inputs/day01/example.txt");
+        var linesOpt = Util.readFileAsLines("/inputs/day01/input.txt");
         if (linesOpt.isEmpty()) {
             return;
         }
@@ -41,7 +41,7 @@ public class Day01 {
     }
 
     static int solveSecond(List<String> lines) {
-        var counts = 0;
+        var count = 0;
         var val = 50;
         for (var line : lines) {
             var opChar = line.charAt(0);
@@ -51,31 +51,28 @@ public class Day01 {
                 case 'R' -> 1;
                 default -> throw new IllegalArgumentException();
             };
+            var x = rotation % 100;
+            var y = rotation - x;
+            var hits = (y / 100);
             if (op < 0) {
-                var x = rotation % 100;
-                var y = rotation - x;
-                var hits = 0;
-                if (y > 0) {
-                    hits += (y / 100);
-                }
-                if (x >= val) {
+                if (val != 0 && x >= val) {
                     hits++;
-                    val = (val + 100 - x) % 100;
-                } else {
-                    val = val - x;
                 }
-                counts += hits;
+                System.err.printf("count = %d: Val %d - %d = %d (x = %d, y = %d, current hits = %d)\n", count, val, rotation,
+                        (val - rotation), x, y, hits);
+                val = (val + 100 - x) % 100;
+                count += hits;
             } else {
-                var x = (val + rotation) % 100;
-                var y = (val + rotation) - x;
-                var hits = 0;
-                if (y > 100) {
-                    hits += (y / 100);
+                if (val != 0 && val + x >= 100) {
+                    hits++;
                 }
-                val = x;
-                counts += hits;
+                System.err.printf("count = %d: Val %d + %d = %d (x = %d, y = %d, current hits = %d)\n", count, val, rotation,
+                        (val + rotation), x, y, hits);
+                val = (val + x) % 100;
+                count += hits;
             }
+
         }
-        return counts;
+        return count;
     }
 }
