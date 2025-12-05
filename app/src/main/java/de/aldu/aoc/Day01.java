@@ -58,16 +58,12 @@ public class Day01 {
                 if (val != 0 && x >= val) {
                     hits++;
                 }
-                System.err.printf("count = %d: Val %d - %d = %d (x = %d, y = %d, current hits = %d)\n", count, val, rotation,
-                        (val - rotation), x, y, hits);
                 val = (val + 100 - x) % 100;
                 count += hits;
             } else {
                 if (val != 0 && val + x >= 100) {
                     hits++;
                 }
-                System.err.printf("count = %d: Val %d + %d = %d (x = %d, y = %d, current hits = %d)\n", count, val, rotation,
-                        (val + rotation), x, y, hits);
                 val = (val + x) % 100;
                 count += hits;
             }
