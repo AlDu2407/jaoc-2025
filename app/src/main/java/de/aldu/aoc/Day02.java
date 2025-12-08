@@ -1,5 +1,6 @@
 package de.aldu.aoc;
 
+import de.aldu.aoc.utils.FileUtils;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.stream.Gatherers;
 
 public class Day02 {
     public static void solve() {
-        var linesOpt = Util.readFileAsString("/inputs/day02/input.txt");
+        var linesOpt = FileUtils.readInputAsLine("inputs/day02/input.txt");
         if (linesOpt.isEmpty()) {
             return;
         }

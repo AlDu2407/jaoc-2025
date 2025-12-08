@@ -4,9 +4,11 @@
 package de.aldu.aoc;
 
 public class Main {
-    public static void main(String[] args) {
-        // Day01.solve();
-        // Day02.solve();
-        Day03.solve();
-    }
+
+  static void main(String[] args) {
+//    Day01.solve();
+//    Day02.solve();
+//    Day03.solve();
+    Day04.solve();
+  }
 }

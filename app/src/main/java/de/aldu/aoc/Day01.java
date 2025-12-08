@@ -1,10 +1,11 @@
 package de.aldu.aoc;
 
+import de.aldu.aoc.utils.FileUtils;
 import java.util.List;
 
 public class Day01 {
     public static void solve() {
-        var linesOpt = Util.readFileAsLines("/inputs/day01/input.txt");
+        var linesOpt = FileUtils.readInputAsList("inputs/day01/input.txt");
         if (linesOpt.isEmpty()) {
             return;
         }

@@ -1,11 +1,11 @@
 package de.aldu.aoc;
 
+import de.aldu.aoc.utils.FileUtils;
 import java.util.List;
-import java.util.Objects;
 
 public class Day03 {
     public static void solve() {
-        var linesOpt = Util.readFileAsLines("/inputs/day03/input.txt");
+        var linesOpt = FileUtils.readInputAsList("inputs/day03/input.txt");
         if (linesOpt.isEmpty()) {
             return;
         }
@@ -21,14 +21,12 @@ public class Day03 {
     static long solveFirst(List<String> lines) {
         return lines.stream()
                 .map(line -> maxJoltage(line, 2))
-                .filter(Objects::nonNull)
                 .reduce(0L, Long::sum);
     }
 
     static long solveSecond(List<String> lines) {
         return lines.stream()
                 .map(line -> maxJoltage(line, 12))
-                .filter(Objects::nonNull)
                 .reduce(0L, Long::sum);
     }
 
