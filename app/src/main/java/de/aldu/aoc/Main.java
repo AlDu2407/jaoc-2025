@@ -3,12 +3,14 @@
  */
 package de.aldu.aoc;
 
+import de.aldu.aoc.solutions.Day04;
+
 public class Main {
 
   static void main(String[] args) {
-//    Day01.solve();
-//    Day02.solve();
-//    Day03.solve();
-    Day04.solve();
+    //  new Day01().executeTasks();
+    //  new Day02().executeTasks();
+    //  new Day03().executeTasks();
+    new Day04().executeTasks();
   }
 }
