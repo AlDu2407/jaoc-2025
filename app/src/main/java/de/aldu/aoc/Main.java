@@ -3,7 +3,7 @@
  */
 package de.aldu.aoc;
 
-import de.aldu.aoc.solutions.Day04;
+import de.aldu.aoc.solutions.Day05;
 
 public class Main {
 
@@ -11,6 +11,8 @@ public class Main {
     //  new Day01().executeTasks();
     //  new Day02().executeTasks();
     //  new Day03().executeTasks();
-    new Day04().executeTasks();
+    // new Day04().executeTasks();
+    new Day05().executeTasks();
   }
+
 }

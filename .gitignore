@@ -6,5 +6,9 @@ build
 bin/
 *.class
 
+# Ignore IDE files
+.idea/
+
 # Ignore inputs for AoC :)
 */**/input*.txt
+*/**/input*.in

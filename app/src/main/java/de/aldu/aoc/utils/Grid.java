@@ -3,6 +3,7 @@ package de.aldu.aoc.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -47,7 +48,8 @@ public class Grid<T> {
     return Arrays.stream(Direction.values())
         .map(point::calculate)
         .filter(p -> p.withinBoundaries(rowCount, colCount))
-        .filter(p -> this.at(p).equals(val))
+        .filter(Objects::nonNull)
+        .filter(p -> at(p).equals(val))
         .toList();
   }
 
