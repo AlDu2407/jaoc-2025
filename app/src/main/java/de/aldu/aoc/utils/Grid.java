@@ -3,7 +3,6 @@ package de.aldu.aoc.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -17,6 +16,7 @@ public class Grid<T> {
     this.colCount = colCount;
   }
 
+  @SuppressWarnings("unused")
   public Set<Vec2> getCorners() {
     return Set.of(new Vec2(0, 0), new Vec2(colCount, 0), new Vec2(0, rowCount),
         new Vec2(colCount, rowCount));
@@ -30,6 +30,7 @@ public class Grid<T> {
     grid.get(pos.y()).set(pos.x(), value);
   }
 
+  @SuppressWarnings("unused")
   public List<Vec2> findNeighbours(Vec2 point) {
     return Direction.compassDirections().stream()
         .map(point::calculate)
@@ -37,6 +38,7 @@ public class Grid<T> {
         .toList();
   }
 
+  @SuppressWarnings("unused")
   public List<Vec2> findAllNeighbours(Vec2 point) {
     return Arrays.stream(Direction.values())
         .map(point::calculate)
@@ -48,9 +50,23 @@ public class Grid<T> {
     return Arrays.stream(Direction.values())
         .map(point::calculate)
         .filter(p -> p.withinBoundaries(rowCount, colCount))
-        .filter(Objects::nonNull)
         .filter(p -> at(p).equals(val))
         .toList();
+  }
+
+  public List<T> getColumn(int col, T defaultValue) {
+    if (col < 0 || col >= colCount) {
+      return null;
+    }
+    var result = new ArrayList<T>();
+    for (var y = 0; y < rowCount; y++) {
+      if (col >= grid.get(y).size()) {
+        result.add(defaultValue);
+      } else {
+        result.add(grid.get(y).get(col));
+      }
+    }
+    return result;
   }
 
   public static <T> Grid<T> parseGrid(List<String> lines, Function<Character, T> mapping) {
@@ -60,6 +76,9 @@ public class Grid<T> {
     for (var y = 0; y < rowCount; y++) {
       var line = new ArrayList<T>();
       for (var x = 0; x < colCount; x++) {
+        if (x >= lines.get(y).length()) {
+          break;
+        }
         line.add(x, mapping.apply(lines.get(y).charAt(x)));
       }
 

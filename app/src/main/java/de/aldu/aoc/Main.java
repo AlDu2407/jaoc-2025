@@ -3,16 +3,17 @@
  */
 package de.aldu.aoc;
 
-import de.aldu.aoc.solutions.Day05;
+import de.aldu.aoc.solutions.Day06;
 
 public class Main {
 
-  static void main(String[] args) {
+  static void main() {
     //  new Day01().executeTasks();
     //  new Day02().executeTasks();
     //  new Day03().executeTasks();
-    // new Day04().executeTasks();
-    new Day05().executeTasks();
+    //  new Day04().executeTasks();
+    //  new Day05().executeTasks();
+    new Day06().executeTasks();
   }
 
 }
