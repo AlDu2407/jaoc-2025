@@ -3,6 +3,7 @@ package de.aldu.aoc.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -16,10 +17,10 @@ public class Grid<T> {
     this.colCount = colCount;
   }
 
-  @SuppressWarnings("unused")
+  @SuppressWarnings({"unused", "null"})
   public Set<Vec2> getCorners() {
-    return Set.of(new Vec2(0, 0), new Vec2(colCount, 0), new Vec2(0, rowCount),
-        new Vec2(colCount, rowCount));
+    return Set.of(
+        new Vec2(0, 0), new Vec2(colCount, 0), new Vec2(0, rowCount), new Vec2(colCount, rowCount));
   }
 
   public T at(Vec2 pos) {
@@ -30,7 +31,6 @@ public class Grid<T> {
     grid.get(pos.y()).set(pos.x(), value);
   }
 
-  @SuppressWarnings("unused")
   public List<Vec2> findNeighbours(Vec2 point) {
     return Direction.compassDirections().stream()
         .map(point::calculate)
@@ -38,7 +38,6 @@ public class Grid<T> {
         .toList();
   }
 
-  @SuppressWarnings("unused")
   public List<Vec2> findAllNeighbours(Vec2 point) {
     return Arrays.stream(Direction.values())
         .map(point::calculate)
@@ -85,5 +84,18 @@ public class Grid<T> {
       result.grid.add(y, line);
     }
     return result;
+  }
+
+  public Optional<Integer> findInRow(T value, int rowIndex) {
+    if (rowIndex < 0 || rowIndex >= rowCount) {
+      throw new IllegalArgumentException("Row %d outside of grid range.".formatted(rowIndex));
+    }
+
+    var colIndex = grid.get(rowIndex).indexOf(value);
+    if (colIndex == -1) {
+      return Optional.empty();
+    }
+
+    return Optional.of(colIndex);
   }
 }

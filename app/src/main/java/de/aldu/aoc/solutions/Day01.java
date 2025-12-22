@@ -46,11 +46,12 @@ public class Day01 extends AbstractDay {
     for (var line : lines) {
       var opChar = line.charAt(0);
       var rotation = Integer.parseInt(line.substring(1));
-      var op = switch (opChar) {
-        case 'L' -> -1;
-        case 'R' -> 1;
-        default -> throw new IllegalArgumentException();
-      };
+      var op =
+          switch (opChar) {
+            case 'L' -> -1;
+            case 'R' -> 1;
+            default -> throw new IllegalArgumentException();
+          };
       var x = rotation % 100;
       var y = rotation - x;
       var hits = (y / 100);

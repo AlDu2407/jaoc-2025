@@ -11,9 +11,7 @@ public class Day03 extends AbstractDay {
       return;
     }
     var lines = linesOpt.get();
-    var result = lines.stream()
-        .map(line -> maxJoltage(line, 2))
-        .reduce(0L, Long::sum);
+    var result = lines.stream().map(line -> maxJoltage(line, 2)).reduce(0L, Long::sum);
     printResult(Task.ONE, result);
   }
 
@@ -24,9 +22,7 @@ public class Day03 extends AbstractDay {
       return;
     }
     var lines = linesOpt.get();
-    var result = lines.stream()
-        .map(line -> maxJoltage(line, 12))
-        .reduce(0L, Long::sum);
+    var result = lines.stream().map(line -> maxJoltage(line, 12)).reduce(0L, Long::sum);
     printResult(Task.TWO, result);
   }
 
@@ -66,5 +62,4 @@ public class Day03 extends AbstractDay {
     }
     return Long.parseLong(sb.toString());
   }
-
 }

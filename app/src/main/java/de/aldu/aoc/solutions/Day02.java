@@ -16,15 +16,17 @@ public class Day02 extends AbstractDay {
     if (linesOpt.isEmpty()) {
       return;
     }
-    var result = Arrays.stream(linesOpt.get().split(","))
-        .map(ids -> {
-          var idsSplit = ids.split("-");
-          return new Pair<>(idsSplit[0], idsSplit[1]);
-        })
-        .map(Day02::getInvalidIdsFirst)
-        .flatMap(Set::stream)
-        .filter(Objects::nonNull)
-        .reduce(0L, Long::sum);
+    var result =
+        Arrays.stream(linesOpt.get().split(","))
+            .map(
+                ids -> {
+                  var idsSplit = ids.split("-");
+                  return new Pair<>(idsSplit[0], idsSplit[1]);
+                })
+            .map(Day02::getInvalidIdsFirst)
+            .flatMap(Set::stream)
+            .filter(Objects::nonNull)
+            .reduce(0L, Long::sum);
     printResult(Task.ONE, result);
   }
 
@@ -34,15 +36,17 @@ public class Day02 extends AbstractDay {
     if (linesOpt.isEmpty()) {
       return;
     }
-    var result = Arrays.stream(linesOpt.get().split(","))
-        .map(ids -> {
-          var idsSplit = ids.split("-");
-          return new Pair<>(idsSplit[0], idsSplit[1]);
-        })
-        .map(Day02::getInvalidIdsSecond)
-        .flatMap(Set::stream)
-        .filter(Objects::nonNull)
-        .reduce(0L, Long::sum);
+    var result =
+        Arrays.stream(linesOpt.get().split(","))
+            .map(
+                ids -> {
+                  var idsSplit = ids.split("-");
+                  return new Pair<>(idsSplit[0], idsSplit[1]);
+                })
+            .map(Day02::getInvalidIdsSecond)
+            .flatMap(Set::stream)
+            .filter(Objects::nonNull)
+            .reduce(0L, Long::sum);
     printResult(Task.TWO, result);
   }
 
@@ -109,8 +113,11 @@ public class Day02 extends AbstractDay {
   private static boolean isSequence(String val) {
     var range = Math.ceil(val.length() / 2);
     for (var i = 1; i <= range; i++) {
-      var set = val.chars().mapToObj(c -> (char) c).gather(Gatherers.windowFixed(i))
-          .collect(Collectors.toSet());
+      var set =
+          val.chars()
+              .mapToObj(c -> (char) c)
+              .gather(Gatherers.windowFixed(i))
+              .collect(Collectors.toSet());
       if (set.size() == 1) {
         return true;
       }

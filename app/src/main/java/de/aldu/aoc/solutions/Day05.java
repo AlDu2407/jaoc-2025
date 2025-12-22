@@ -17,15 +17,23 @@ public class Day05 extends AbstractDay {
     if (linesOpt.isEmpty()) {
       return;
     }
-    var ranges = linesOpt.get().stream().filter(line -> line.contains("-"))
-        .map(line -> line.split("-"))
-        .map(parts -> new Range(Long.parseLong(parts[0]), Long.parseLong(parts[1])))
-        .collect(Collectors.toSet());
-    var inputs = linesOpt.get().stream().filter(line -> !line.isBlank())
-        .filter(line -> !line.contains("-")).map(Long::parseLong).collect(Collectors.toSet());
+    var ranges =
+        linesOpt.get().stream()
+            .filter(line -> line.contains("-"))
+            .map(line -> line.split("-"))
+            .map(parts -> new Range(Long.parseLong(parts[0]), Long.parseLong(parts[1])))
+            .collect(Collectors.toSet());
+    var inputs =
+        linesOpt.get().stream()
+            .filter(line -> !line.isBlank())
+            .filter(line -> !line.contains("-"))
+            .map(Long::parseLong)
+            .collect(Collectors.toSet());
 
-    var count = inputs.stream()
-        .filter(input -> ranges.stream().anyMatch(range -> range.isInRange(input))).count();
+    var count =
+        inputs.stream()
+            .filter(input -> ranges.stream().anyMatch(range -> range.isInRange(input)))
+            .count();
     printResult(Task.ONE, count);
   }
 
@@ -36,11 +44,13 @@ public class Day05 extends AbstractDay {
       return;
     }
 
-    Deque<Range> ranges = linesOpt.get().stream().filter(line -> line.contains("-"))
-        .map(line -> line.split("-"))
-        .map(parts -> new Range(Long.parseLong(parts[0]), Long.parseLong(parts[1])))
-        .sorted(Comparator.comparing(Range::start))
-        .collect(LinkedList::new, List::add, List::addAll);
+    Deque<Range> ranges =
+        linesOpt.get().stream()
+            .filter(line -> line.contains("-"))
+            .map(line -> line.split("-"))
+            .map(parts -> new Range(Long.parseLong(parts[0]), Long.parseLong(parts[1])))
+            .sorted(Comparator.comparing(Range::start))
+            .collect(LinkedList::new, List::add, List::addAll);
     var adjustedRanges = new HashSet<Range>();
     var temp = ranges.pop();
     while (!ranges.isEmpty()) {

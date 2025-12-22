@@ -20,23 +20,28 @@ public class Day06 extends AbstractDay {
     }
     var lines = linesOpt.get();
     var size = lines.size();
-    var operandLists = lines.subList(0, size - 1).stream()
-        .map(line -> Arrays.stream(line.split(" "))
+    var operandLists =
+        lines.subList(0, size - 1).stream()
+            .map(
+                line ->
+                    Arrays.stream(line.split(" "))
+                        .filter(Predicate.not(String::isBlank))
+                        .map(Long::parseLong)
+                        .toList())
+            .toList();
+    var operatorList =
+        Arrays.stream(lines.get(size - 1).split(" "))
             .filter(Predicate.not(String::isBlank))
-            .map(Long::parseLong)
-            .toList())
-        .toList();
-    var operatorList = Arrays.stream(lines.get(size - 1).split(" "))
-        .filter(Predicate.not(String::isBlank))
-        .map(Operator::ofSign)
-        .toList();
+            .map(Operator::ofSign)
+            .toList();
     var result = 0L;
     for (var i = 0; i < operatorList.size(); i++) {
       var j = i;
       var operator = operatorList.get(i);
-      result += operandLists.stream()
-          .map(line -> line.get(j))
-          .reduce(operator.identity, operator.accumulator);
+      result +=
+          operandLists.stream()
+              .map(line -> line.get(j))
+              .reduce(operator.identity, operator.accumulator);
     }
     printResult(Task.ONE, result);
   }
@@ -65,9 +70,14 @@ public class Day06 extends AbstractDay {
       if (col.getLast().compareTo(' ') != 0) {
         op = Operator.ofSign(col.getLast());
       }
-      var numberString = col.subList(0, col.size() - 1).stream().collect(
-          Collector.of(StringBuilder::new, StringBuilder::append, StringBuilder::append,
-              StringBuilder::toString));
+      var numberString =
+          col.subList(0, col.size() - 1).stream()
+              .collect(
+                  Collector.of(
+                      StringBuilder::new,
+                      StringBuilder::append,
+                      StringBuilder::append,
+                      StringBuilder::toString));
       operands.add(Long.parseLong(numberString.trim()));
     }
     if (op != null) {

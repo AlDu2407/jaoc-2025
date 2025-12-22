@@ -24,7 +24,6 @@ public class FileUtils {
   }
 
   public static Optional<String> readInputAsLine(String fileName) {
-    return readInputAsList(fileName)
-        .map(lines -> String.join("", lines));
+    return readInputAsList(fileName).map(lines -> String.join("", lines));
   }
 }
