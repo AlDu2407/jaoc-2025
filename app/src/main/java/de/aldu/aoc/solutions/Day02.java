@@ -46,19 +46,6 @@ public class Day02 extends AbstractDay {
     printResult(Task.TWO, result);
   }
 
-
-  private static long solveFirst(String input) {
-    return Arrays.stream(input.split(","))
-        .map(ids -> {
-          var idsSplit = ids.split("-");
-          return new Pair<>(idsSplit[0], idsSplit[1]);
-        })
-        .map(Day02::getInvalidIdsFirst)
-        .flatMap(Set::stream)
-        .filter(Objects::nonNull)
-        .reduce(0L, Long::sum);
-  }
-
   // Numbers with odd length are always valid, so we can ignore them.
   // For numbers with even length the following has to be done:
   // let x be a number with even length 'n', then x is a sequence of characters
